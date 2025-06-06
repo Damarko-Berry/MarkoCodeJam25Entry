@@ -14,12 +14,54 @@
       font-family: sans-serif;
     }
 
+
     #captcha-container {
       background: white;
       width: 390px;
       height: 300px;
+      position: relative;
     }
-
+    #solve{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .bottomCenter{
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .centerLeft{
+        position: absolute;
+        top: 40%;
+        left: 25%;
+    }
+    .centerRight{
+        position: absolute;
+        top: 40%;
+        right: 25%;
+    }
+    .Bottomleft{
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+    }
+    .BottomRight{
+        position: absolute;
+        bottom: 0%;
+        right: 0%;
+    }
+    .TopCenter{
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .MAN{
+        
+    }
     /* Your style here... */
   </style>
 </head>
@@ -27,26 +69,89 @@
 <body>
   <div id="captcha-container">
     <!-- Add your CAPTCHA here: -->
-    Hello world!
-
+    <p id="BTBT">Bet ya can't catch me!</p>
+      <p id="Game">
+          <img class="bottomCenter" src ="Gifs\Horizontal.gif" onclick="Catch()" />
+          <img class="centerLeft" src="Gifs\NegDia.gif" onclick="Catch()" />
+          <img class="centerRight" src ="Gifs\PosDia.gif" onclick="Catch()" />
+          <!-- Man -->
+          <img id="Man1" class="TopCenter MAN" src ="imgs\Man.png" onclick="Loser()" />
+          <img id="Man2" class="Bottomleft MAN" src ="imgs\Man.png" onclick="Loser()" />
+          <img id="Man3" class="BottomRight MAN" src ="imgs\Man.png" onclick="Loser()" />
+      </p>
     <!-- We've added a sample button. Feel free to remove it: -->
-    <button id="solve">
+    <button id="solve" hidden>
       Solve!
+    </button>
+    <button id="Lost" hidden>
+      Restart!
     </button>
   </div>
 
   <script type="text/javascript">
+
+      var Caught = false;
+      var lost = false;
+
     (function(window, document){
       // This is how you tell the parent window that the CAPTCHA was successful.
       function captchaSuccess() {
         window.top.postMessage("success", '*');
       }
-
+      
       // Your CAPTCHA code goes here, we've added a simple example below:
       document.getElementById('solve')
            .addEventListener('click', () => captchaSuccess());
 
     })(window, document);
+
+      function Catch() {
+          //remove hidden attribute from "solve"
+          document.getElementById('solve').removeAttribute("hidden");
+          Caught = true;
+          SetBTBT("YOU GOT IT!");
+      }
+      var Men = document.getElementsByClassName('MAN');
+      var CM = 0;
+      function Swap(index) {
+          
+          for (var i = 0; i < Men.length; i++) {
+              if (i == index) {
+                  Men[i].removeAttribute("hidden");
+              } else {
+                  Men[i].hidden = true;
+              }
+          }
+      }
+
+      async function Run() {
+          Swap(CM);
+          await timer(16);
+          Men = document.getElementsByClassName('MAN');
+          console.log(Men.length);
+          while (!Caught && !lost) {
+              CM++;
+              if (CM >= Men.length) {
+                  CM = 0;
+              }
+              Swap(CM);
+              await timer(126);
+          }
+          document.getElementById('captcha-container').removeChild((document.getElementById('Game')));
+      }
+
+      function timer(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      function Loser() {
+          document.getElementById('captcha-container').removeChild((document.getElementById('Game')));
+          document.getElementById('Lost').removeAttribute("hidden");
+          SetBTBT("Too slow!")
+      }
+      function SetBTBT(tect) {
+          document.getElementById('BTBT').innerText = tect;
+      }
+      Run();
   </script>
 </body>
 </html>
