@@ -27,41 +27,16 @@
         left: 50%;
         transform: translateX(-50%);
     }
-    .bottomCenter{
-        position: absolute;
-        bottom: 10%;
+    img{
+        max-width:33%;
+        height:85%;
+        position: absolute
+    }
+    .center{
         left: 50%;
         transform: translateX(-50%);
     }
-    .centerLeft{
-        position: absolute;
-        top: 40%;
-        left: 25%;
-    }
-    .centerRight{
-        position: absolute;
-        top: 40%;
-        right: 25%;
-    }
-    .Bottomleft{
-        position: absolute;
-        bottom: 0%;
-        left: 0%;
-    }
-    .BottomRight{
-        position: absolute;
-        bottom: 0%;
-        right: 0%;
-    }
-    .TopCenter{
-        position: absolute;
-        top: 25%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .MAN{
-        
-    }
+    
     /* Your style here... */
   </style>
 </head>
@@ -71,13 +46,9 @@
     <!-- Add your CAPTCHA here: -->
     <p id="BTBT">Bet ya can't catch me!</p>
       <p id="Game">
-          <img class="bottomCenter" src ="Gifs\Horizontal.gif" onclick="Catch()" />
-          <img class="centerLeft" src="Gifs\NegDia.gif" onclick="Catch()" />
-          <img class="centerRight" src ="Gifs\PosDia.gif" onclick="Catch()" />
-          <!-- Man -->
-          <img id="Man1" class="TopCenter MAN" src ="imgs\Man.png" onclick="Loser()" />
-          <img id="Man2" class="Bottomleft MAN" src ="imgs\Man.png" onclick="Loser()" />
-          <img id="Man3" class="BottomRight MAN" src ="imgs\Man.png" onclick="Loser()" />
+          <img id="G1" style="left: 0px" src="Gifs/0001.png" />
+          <img id="G2" class="center" src="Gifs/0002.png" />
+          <img id="G3" style="right: 0px" src="Gifs/0003.png" />
       </p>
     <!-- We've added a sample button. Feel free to remove it: -->
     <button id="solve" hidden>
@@ -111,47 +82,226 @@
           Caught = true;
           SetBTBT("YOU GOT IT!");
       }
-      var Men = document.getElementsByClassName('MAN');
-      var CM = 0;
-      function Swap(index) {
-          
-          for (var i = 0; i < Men.length; i++) {
-              if (i == index) {
-                  Men[i].removeAttribute("hidden");
-              } else {
-                  Men[i].hidden = true;
-              }
-          }
-      }
-
-      async function Run() {
-          Swap(CM);
-          await timer(16);
-          Men = document.getElementsByClassName('MAN');
-          console.log(Men.length);
-          while (!Caught && !lost) {
-              CM++;
-              if (CM >= Men.length) {
-                  CM = 0;
-              }
-              Swap(CM);
-              await timer(126);
-          }
-          document.getElementById('captcha-container').removeChild((document.getElementById('Game')));
-      }
+      const imgs = [
+          "Gifs/0001.png",
+          "Gifs/0002.png",
+          "Gifs/0003.png",
+          "Gifs/0004.png",
+          "Gifs/0005.png",
+          "Gifs/0006.png",
+          "Gifs/0007.png",
+          "Gifs/0008.png",
+          "Gifs/0009.png",
+          "Gifs/0010.png",
+          "Gifs/0011.png",
+          "Gifs/0012.png",
+          "Gifs/0013.png",
+          "Gifs/0014.png",
+          "Gifs/0015.png",
+          "Gifs/0016.png",
+          "Gifs/0017.png",
+          "Gifs/0018.png",
+          "Gifs/0019.png",
+          "Gifs/0020.png",
+          "Gifs/0021.png",
+          "Gifs/0022.png",
+          "Gifs/0023.png",
+          "Gifs/0024.png",
+          "Gifs/0025.png",
+          "Gifs/0026.png",
+          "Gifs/0027.png",
+          "Gifs/0028.png",
+          "Gifs/0029.png",
+          "Gifs/0030.png",
+          "Gifs/0031.png",
+          "Gifs/0032.png",
+          "Gifs/0033.png",
+          "Gifs/0034.png",
+          "Gifs/0035.png",
+          "Gifs/0036.png",
+          "Gifs/0037.png",
+          "Gifs/0038.png",
+          "Gifs/0039.png",
+          "Gifs/0040.png",
+          "Gifs/0041.png",
+          "Gifs/0042.png",
+          "Gifs/0043.png",
+          "Gifs/0044.png",
+          "Gifs/0045.png",
+          "Gifs/0046.png",
+          "Gifs/0047.png",
+          "Gifs/0048.png",
+          "Gifs/0049.png",
+          "Gifs/0050.png",
+          "Gifs/0051.png",
+          "Gifs/0052.png",
+          "Gifs/0053.png",
+          "Gifs/0054.png",
+          "Gifs/0055.png",
+          "Gifs/0056.png",
+          "Gifs/0057.png",
+          "Gifs/0058.png",
+          "Gifs/0059.png",
+          "Gifs/0060.png",
+          "Gifs/0061.png",
+          "Gifs/0062.png",
+          "Gifs/0063.png",
+          "Gifs/0064.png",
+          "Gifs/0065.png",
+          "Gifs/0066.png",
+          "Gifs/0067.png",
+          "Gifs/0068.png",
+          "Gifs/0069.png",
+          "Gifs/0070.png",
+          "Gifs/0071.png",
+          "Gifs/0072.png",
+          "Gifs/0073.png",
+          "Gifs/0074.png",
+          "Gifs/0075.png",
+          "Gifs/0076.png",
+          "Gifs/0077.png",
+          "Gifs/0078.png",
+          "Gifs/0079.png",
+          "Gifs/0080.png",
+          "Gifs/0081.png",
+          "Gifs/0082.png",
+          "Gifs/0083.png",
+          "Gifs/0084.png",
+          "Gifs/0085.png",
+          "Gifs/0086.png",
+          "Gifs/0087.png",
+          "Gifs/0088.png",
+          "Gifs/0089.png",
+          "Gifs/0090.png",
+          "Gifs/0091.png",
+          "Gifs/0092.png",
+          "Gifs/0093.png",
+          "Gifs/0094.png",
+          "Gifs/0095.png",
+          "Gifs/0096.png",
+          "Gifs/0097.png",
+          "Gifs/0098.png",
+          "Gifs/0099.png",
+          "Gifs/0100.png",
+          "Gifs/0101.png",
+          "Gifs/0102.png",
+          "Gifs/0103.png",
+          "Gifs/0104.png",
+          "Gifs/0105.png",
+          "Gifs/0106.png",
+          "Gifs/0107.png",
+          "Gifs/0108.png",
+          "Gifs/0109.png",
+          "Gifs/0110.png",
+          "Gifs/0111.png",
+          "Gifs/0112.png",
+          "Gifs/0113.png"
+      ];
 
       function timer(ms) {
           return new Promise(resolve => setTimeout(resolve, ms));
       }
-      function Loser() {
-          document.getElementById('captcha-container').removeChild((document.getElementById('Game')));
+      
+      const animStates = {
+          G1: { frame: 0, playing: true, interval: null },
+          G2: { frame: 0, playing: true, interval: null },
+          G3: { frame: 0, playing: true, interval: null }
+      };
+
+      
+      function startAnimation(imgId) {
+          const imgElem = document.getElementById(imgId);
+          const state = animStates[imgId];
+          if (state.interval) return; 
+
+          state.playing = true;
+          state.interval = setInterval(() => {
+              if (!state.playing || lost) return;
+              state.frame++;
+              if (state.frame >= imgs.length) {
+                  loseGame();
+                  return;
+              }
+              imgElem.src = imgs[state.frame];
+          }, 60); 
+      }
+
+      
+      function pauseAnimation(imgId) {
+          const state = animStates[imgId];
+          state.playing = false;
+          if (state.interval) {
+              clearInterval(state.interval);
+              state.interval = null;
+          }
+      }
+
+      
+      const imgIds = ["G1", "G2", "G3"];
+      const pauseOrder = imgIds
+          .map(id => ({ id, sort: Math.random() }))
+          .sort((a, b) => a.sort - b.sort)
+          .map(obj => obj.id);
+
+      let currentPauseIndex = 0;
+
+      
+      document.getElementById("BTBT").textContent =
+          "Pause in order: " + pauseOrder.join(", ");
+
+      
+      imgIds.forEach(id => {
+          startAnimation(id);
+          document.getElementById(id).addEventListener("click", () => {
+              if (pauseOrder[currentPauseIndex] === id) {
+                  pauseAnimation(id);
+                  currentPauseIndex++;
+                  if (currentPauseIndex === pauseOrder.length) {
+                      
+                      document.getElementById('solve').removeAttribute("hidden");
+                      document.getElementById("BTBT").textContent = "YOU GOT IT!";
+                  }
+              } else {
+                  
+                  imgIds.forEach((imgId, idx) => {
+                      if (idx >= currentPauseIndex) {
+                          
+                          if (!animStates[imgId].playing) {
+                              startAnimation(imgId);
+                          }
+                      }
+                  });
+                  
+                  currentPauseIndex = 0;
+                  document.getElementById("BTBT").textContent =
+                      "Wrong order! Try again: " + pauseOrder.join(", ");
+              }
+          });
+      });
+      
+      document.getElementById('Lost').addEventListener('click', () => {
+          
+          document.getElementById('Game').removeAttribute("hidden");
+          lost = false;
+          currentPauseIndex = 0;
+          imgIds.forEach((id, idx) => {
+              animStates[id].frame = 0;
+              document.getElementById(id).src = imgs[0];
+              startAnimation(id);
+          });
+          document.getElementById('Lost').setAttribute("hidden", "hidden");
+          document.getElementById('solve').setAttribute("hidden", "hidden");
+          document.getElementById("BTBT").textContent = "Pause in order: " + pauseOrder.join(", ");
+      });
+      function loseGame() {
+          lost = true;
+         
+          imgIds.forEach(id => pauseAnimation(id));
+          
           document.getElementById('Lost').removeAttribute("hidden");
-          SetBTBT("Too slow!")
+          document.getElementById('Game').hidden = true;
+          document.getElementById("BTBT").textContent = "You lost! Try again.";
       }
-      function SetBTBT(tect) {
-          document.getElementById('BTBT').innerText = tect;
-      }
-      Run();
   </script>
 </body>
 </html>
