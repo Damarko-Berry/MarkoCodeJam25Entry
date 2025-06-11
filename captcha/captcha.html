@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -197,6 +197,7 @@
           "Gifs/0112.png",
           "Gifs/0113.png"
       ];
+      const Taunts = ["Typical Bot behavior🤖", "You couldn't catch a cold on a rainy day🌧️", "YOU CAN'T STOP ME!💨", "You'll never become a ninja like this🥷"];
 
       function timer(ms) {
           return new Promise(resolve => setTimeout(resolve, ms));
@@ -247,7 +248,7 @@
 
       
       document.getElementById("BTBT").textContent =
-          "Pause in order: " + pauseOrder.join(", ");
+          "Stop the Ninja!";
 
       
       imgIds.forEach(id => {
@@ -258,8 +259,10 @@
                   currentPauseIndex++;
                   if (currentPauseIndex === pauseOrder.length) {
                       
-                      document.getElementById('solve').removeAttribute("hidden");
+                      //document.getElementById('solve').removeAttribute("hidden");
+                      document.getElementById('Game').hidden = true;
                       document.getElementById("BTBT").textContent = "YOU GOT IT!";
+                      window.top.postMessage("success", '*');
                   }
               } else {
                   
@@ -274,7 +277,7 @@
                   
                   currentPauseIndex = 0;
                   document.getElementById("BTBT").textContent =
-                      "Wrong order! Try again: " + pauseOrder.join(", ");
+                      Taunts[getRandomInt(0, Taunts.length)];
               }
           });
       });
@@ -291,7 +294,7 @@
           });
           document.getElementById('Lost').setAttribute("hidden", "hidden");
           document.getElementById('solve').setAttribute("hidden", "hidden");
-          document.getElementById("BTBT").textContent = "Pause in order: " + pauseOrder.join(", ");
+          document.getElementById("BTBT").textContent = "Stop The Ninjas!";
       });
       function loseGame() {
           lost = true;
@@ -300,7 +303,19 @@
           
           document.getElementById('Lost').removeAttribute("hidden");
           document.getElementById('Game').hidden = true;
-          document.getElementById("BTBT").textContent = "You lost! Try again.";
+          document.getElementById("BTBT").textContent = "Too Slow";
+      }
+      function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          var result = Math.floor(Math.random() * (max - min + 1)) + min;
+          if (result >= max) {
+              result = max-1;
+          }
+          else if (result < min) {
+              result = min;
+          }
+          return result;
       }
   </script>
 </body>
